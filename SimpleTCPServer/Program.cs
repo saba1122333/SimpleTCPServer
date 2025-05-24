@@ -15,6 +15,24 @@ internal class WebServer
     private static readonly string[] IGNORE_ENDPOINTS = { "favicon.ico" };
     private static readonly string ALLOWED_METHOD = "GET";
 
+    private static readonly object _logLock = new object();
+    private static readonly string _logFile = Path.Combine("..", "..", "..", "logs", "requests.log");
+
+    private static void LogRequest(string clientIP, string method, string url, string massage, int statusCode)
+    {
+        string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} | {clientIP} | {method} {url} | {massage} | {statusCode}\n";
+
+        lock (_logLock)
+        {
+            string? logDirectory = Path.GetDirectoryName(_logFile);
+            if (!string.IsNullOrEmpty(logDirectory))
+            {
+                Directory.CreateDirectory(logDirectory);
+            }
+            File.AppendAllText(_logFile, logEntry);
+        }
+    }
+
 
 
     private static void StartServer()
