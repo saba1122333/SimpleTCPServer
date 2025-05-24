@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>400 - Bad Request</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #ff9a56, #ffad56, #ff9a56, #ffad56);
+            background-size: 400% 400%;
+            animation: wavyGradient 6s ease infinite;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .error-code {
+            font-size: 7rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+        }
+
+        .error-message {
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        .broken-chain {
+            font-size: 3rem;
+            margin: 1rem;
+            animation: swing 3s ease-in-out infinite;
+            display: inline-block;
+            transform-origin: top center;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .suggestion {
+            background: rgba(255,255,255,0.15);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+        }
+
+        @keyframes wavyGradient {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes swing {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(10deg);
+            }
+
+            75% {
+                transform: rotate(-10deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="error-code">400</h1>
+        <div class="broken-chain">⛓️‍💥</div>
+        <p class="error-message">BAD REQUEST</p>
+        <p class="subtitle">
+            Oops! Your request seems to be malformed or missing required information.
+        </p>
+        <div class="suggestion">
+            💡 Please check your request format and try again
+        </div>
+    </div>
+</body>
+</html>

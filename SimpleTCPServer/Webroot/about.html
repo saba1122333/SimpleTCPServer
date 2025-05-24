@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - TCP Web Server</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff9a56, #ffad56, #ffc947, #ffad56);
+            background-size: 400% 400%;
+            animation: wavyGradient 8s ease infinite;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+        }
+
+            .nav-link:hover,
+            .nav-link.active {
+                background: rgba(255,255,255,0.3);
+                transform: translateY(-2px);
+            }
+
+        main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: slideInUp 1s ease;
+        }
+
+            .about-header h1 {
+                font-size: 3.5rem;
+                margin-bottom: 1rem;
+                text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+                animation: glow 3s ease-in-out infinite alternate;
+            }
+
+            .about-header p {
+                font-size: 1.3rem;
+                opacity: 0.9;
+            }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+            .feature-card:hover {
+                transform: translateY(-10px) scale(1.02);
+                background: rgba(255,255,255,0.18);
+            }
+
+            .feature-card:nth-child(even) {
+                animation-delay: -3s;
+            }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: sparkleRotate 4s linear infinite;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .tech-section,
+        .architecture-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+            .tech-section h2,
+            .architecture-section h2 {
+                text-align: center;
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+                text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+            }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+            .tech-item:hover {
+                transform: translateY(-5px);
+                background: rgba(255,255,255,0.25);
+            }
+
+        .tech-icon {
+            font-size: 1.5rem;
+        }
+
+        .tech-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .arch-layer {
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+            .arch-layer:hover {
+                transform: scale(1.05);
+                background: rgba(255,255,255,0.25);
+            }
+
+        .layer-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .layer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .layer-icon {
+            font-size: 1.5rem;
+        }
+
+        .arch-arrow {
+            font-size: 2rem;
+            color: rgba(255,255,255,0.8);
+            animation: bounce 2s infinite;
+        }
+
+        .back-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(45deg, #ff6b35, #ff8c42);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+        }
+
+            .btn:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 8px 25px rgba(255,107,53,0.4);
+            }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.1);
+            margin-top: 4rem;
+        }
+
+        @keyframes wavyGradient {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 2px 2px 0px rgba(0,0,0,0.2), 0 0 20px rgba(255,255,255,0.3);
+            }
+
+            100% {
+                text-shadow: 2px 2px 0px rgba(0,0,0,0.2), 0 0 30px rgba(255,255,255,0.5);
+            }
+        }
+
+        @keyframes sparkleRotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-stack {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .arch-layer {
+                width: 250px;
+            }
+
+            main {
+                margin-top: 120px;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🚀 TCP Server</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link active">About</a>
+        </div>
+    </nav>
+
+    <main class="about-page">
+        <div class="about-header">
+            <h1>About This Server</h1>
+            <p>A custom-built TCP web server crafted with C# and .NET</p>
+        </div>
+
+        <div class="about-content">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>Raw TCP Sockets</h3>
+                    <p>Built from the ground up using .NET's TcpListener and NetworkStream for maximum control and performance.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>HTTP Protocol</h3>
+                    <p>Implements HTTP/1.1 protocol with proper headers, status codes, and content negotiation.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Multi-threading</h3>
+                    <p>Each client connection is handled in a separate thread for concurrent request processing.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>Static Files</h3>
+                    <p>Serves HTML, CSS, and JavaScript files with proper MIME types and caching headers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Security</h3>
+                    <p>Includes path traversal protection and file extension validation for secure serving.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Custom Errors</h3>
+                    <p>Beautiful error pages with proper HTTP status codes (404, 403, 405, 400).</p>
+                </div>
+            </div>
+
+            <div class="tech-section">
+                <h2>Technical Stack</h2>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <span class="tech-icon">💻</span>
+                        <span class="tech-name">C#</span>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-icon">⚙️</span>
+                        <span class="tech-name">.NET 8</span>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-icon">🔌</span>
+                        <span class="tech-name">TCP Sockets</span>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-icon">🌐</span>
+                        <span class="tech-name">HTTP/1.1</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="architecture-section">
+                <h2>Architecture Overview</h2>
+                <div class="architecture-diagram">
+                    <div class="arch-layer">
+                        <div class="layer-title">Client (Browser)</div>
+                        <div class="layer-content">
+                            <span class="layer-icon">🌐</span>
+                            HTTP Requests
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="layer-title">TCP Server</div>
+                        <div class="layer-content">
+                            <span class="layer-icon">🚀</span>
+                            TcpListener
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="layer-title">Request Handler</div>
+                        <div class="layer-content">
+                            <span class="layer-icon">⚡</span>
+                            Thread Pool
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="layer-title">File System</div>
+                        <div class="layer-content">
+                            <span class="layer-icon">📁</span>
+                            Static Files
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-section">
+            <a href="index.html" class="btn btn-primary">
+                <span class="btn-icon">←</span>
+                Back to Home
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 TCP Web Server. Built with ❤️ and C#</p>
+    </footer>
+</body>
+</html>

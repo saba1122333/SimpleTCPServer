@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 - Access Forbidden</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff6b6b, #ee5a24);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .error-code {
+            font-size: 7rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+            color: #fff;
+        }
+
+        .lock {
+            font-size: 3rem;
+            margin: 1rem;
+            animation: shake 2s infinite;
+            display: inline-block;
+        }
+
+        .error-message {
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .warning {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px) rotate(-5deg);
+            }
+
+            75% {
+                transform: translateX(5px) rotate(5deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="error-code">403</h1>
+        <div class="lock">🔒</div>
+        <p class="error-message">403 - Access Forbidden!</p>
+        <p class="subtitle">You don't have permission to access this resource.</p>
+        <div class="warning">
+            ⚠️ This area is restricted. Please contact the administrator if you believe this is an error.
+        </div>
+    </div>
+</body>
+</html>
