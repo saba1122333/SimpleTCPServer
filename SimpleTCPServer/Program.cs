@@ -146,8 +146,110 @@ internal class WebServer
 
 
     }
-    private static void HandleErorr(int code)
+
+    private static void HandleSucess(int code, string fullPath, string massage, NetworkStream stream)
     {
+
+        byte[] Content;
+        string headers;
+        byte[] headerBytes;
+        string contentType = Path.GetExtension(fullPath).ToLower() switch
+        {
+            ".html" => "text/html",
+            ".css" => "text/css",
+            ".js" => "application/javascript",
+            _ => "text/plain"
+        };
+
+
+        Content = File.ReadAllBytes(fullPath);
+
+        headers = $"HTTP/1.1 {code} {massage}\r\nContent-Type: {contentType}\r\nContent-Length: " + Content.Length + "\r\n\r\n";
+        headerBytes = System.Text.Encoding.UTF8.GetBytes(headers);
+        // Send headers then file content
+        stream.Write(headerBytes, 0, headerBytes.Length);
+        stream.Write(Content, 0, Content.Length);
+
+    }
+
+    private static void HandleErorr(int code, string massage, NetworkStream stream)
+    {
+        byte[] htmlContent;
+        string headers;
+        byte[] headerBytes;
+        string fileName;
+        string filePath;
+        string fullPath;
+
+        switch (code)
+        {
+
+            case 400:
+                fileName = "error400.html";
+                filePath = Path.Combine("..", "..", "..", Root, fileName);
+                fullPath = Path.GetFullPath(filePath);
+
+                htmlContent = File.ReadAllBytes(fullPath);
+
+                headers = $"HTTP/1.1 {code} {massage}\r\nContent-Type: text/html\r\nContent-Length: " + htmlContent.Length + "\r\n\r\n";
+                headerBytes = System.Text.Encoding.UTF8.GetBytes(headers);
+
+                break;
+
+
+            case 403:
+                fileName = "error403.html";
+                filePath = Path.Combine("..", "..", "..", Root, fileName);
+                fullPath = Path.GetFullPath(filePath);
+
+                htmlContent = File.ReadAllBytes(fullPath);
+
+                headers = $"HTTP/1.1 {code} {massage}\r\nContent-Type: text/html\r\nContent-Length: " + htmlContent.Length + "\r\n\r\n";
+                headerBytes = System.Text.Encoding.UTF8.GetBytes(headers);
+
+                break;
+
+            case 404:
+                fileName = "error404.html";
+                filePath = Path.Combine("..", "..", "..", Root, fileName);
+                fullPath = Path.GetFullPath(filePath);
+
+                htmlContent = File.ReadAllBytes(fullPath);
+
+                headers = $"HTTP/1.1 {code} {massage}\r\nContent-Type: text/html\r\nContent-Length: " + htmlContent.Length + "\r\n\r\n";
+                headerBytes = System.Text.Encoding.UTF8.GetBytes(headers);
+
+                break;
+            case 405:
+                fileName = "error405.html";
+                filePath = Path.Combine("..", "..", "..", Root, fileName);
+                fullPath = Path.GetFullPath(filePath);
+
+                htmlContent = File.ReadAllBytes(fullPath);
+
+                headers = $"HTTP/1.1 {code} {massage}\r\nContent-Type: text/html\r\nContent-Length: " + htmlContent.Length + "\r\n\r\n";
+                headerBytes = System.Text.Encoding.UTF8.GetBytes(headers);
+
+                break;
+            default:
+
+                fileName = "error.html";
+                filePath = Path.Combine("..", "..", "..", Root, fileName);
+                fullPath = Path.GetFullPath(filePath);
+
+                htmlContent = File.ReadAllBytes(fullPath);
+
+                headers = $"HTTP/1.1 {code} {massage}\r\nContent-Type: text/html\r\nContent-Length: " + htmlContent.Length + "\r\n\r\n";
+                headerBytes = System.Text.Encoding.UTF8.GetBytes(headers);
+
+                break;
+
+        }
+
+        // Send headers then file content
+        stream.Write(headerBytes, 0, headerBytes.Length);
+        stream.Write(htmlContent, 0, htmlContent.Length);
+
 
 
     }
